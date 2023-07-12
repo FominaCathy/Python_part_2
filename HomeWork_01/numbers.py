@@ -21,14 +21,14 @@ def reverse_number(num):
         new_number += (num % 10) * digit
         digit /= 10
         num //= 10
-    return int(new_number)
+    return f'введено 3х значное число. Результат: {int(new_number)}'
 
 
 def get_result(number):
     if number in range(1, 10):
-        return number ** 2
+        return f'введена цифра. Результат: {number ** 2}'
     elif number in range(11, 100):
-        return (number // 10) * (number % 10)
+        return f'введено 2х значное число. Результат: {(number // 10) * (number % 10)}'
     else:
         return reverse_number(number)
 
