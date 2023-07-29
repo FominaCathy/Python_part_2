@@ -1,13 +1,14 @@
+import csv
+import json
+from pathlib import Path
+
+__all__ = ['convert_json_to_csv', 'convert_csv_to_json']
+
 '''
 Мы сформировали текстовый файл с псевдо именами и произведением чисел.
 Напишите функцию, которая создаёт из созданного ранее файла новый с данными в формате JSON.
 Имена пишите с большой буквы. Каждую пару сохраняйте с новой строки.
 '''
-import csv
-import json
-import os
-from pathlib import Path
-import pickle
 
 
 def create_json(file: Path):
@@ -16,7 +17,7 @@ def create_json(file: Path):
         for line in f:
             name, number = line.split(' ')
             dict_data[name.title()] = float(number)
-        with open("newres.json", "w") as fj:
+        with open(f'{file.name}.json', 'w') as fj:
             json.dump(dict_data, fj, indent=2)
 
 
@@ -98,54 +99,8 @@ def convert_csv_to_json(csv_file, json_file):
         json.dump(lst, fj, ensure_ascii=False, indent=2)
 
 
-'''
-Напишите функцию, которая ищет json файлы в указанной директории и сохраняет их содержимое в виде
-одноимённых pickle файлов.
-
-'''
-
-
-def convert_json_to_pickle(file: Path):
-    with (open(file, 'r', encoding='utf-8') as fj,
-          open(f"{file.name}.pickle", 'wb') as fp):
-        current_dir = json.load(fj)
-        pickle.dump(current_dir, fp)
-
-
-def group_convert_json_to_pickle(folder: Path):
-    if folder != "":
-        os.chdir(folder)
-
-    for item in os.listdir():
-        if os.path.isfile(item) and item.split() == '.json':
-            convert_json_to_pickle(item)
-
-
-'''
-Напишите функцию, которая преобразует pickle файл хранящий список словарей в табличный csv файл.
-Для тестированию возьмите pickle версию файла из задачи 4 этого семинара.
-Функция должна извлекать ключи словаря для заголовков столбца из переданного файла.
-'''
-
-
-def convert_pickle_to_csv(file: Path):
-    pass
-
-
-'''
-Прочитайте созданный в прошлом задании csv файл без использования csv.DictReader.
-Распечатайте его как pickle строку.
-'''
-
-
-def reader_csv(file: Path):
-    pass
-
-
 if __name__ == "__main__":
     # create_json('result.txt')
     # fill_bd(Path('test_bd.json'))
     # convert_json_to_csv('test_bd.json')
-    # convert_csv_to_json('test_bd.csv', 'new_test_bd.json')
-    # convert_json_to_pickle('../temp/test_bd.json')
-    group_convert_json_to_pickle("../temp")
+    convert_csv_to_json('test_files/test_bd.csv', 'test_files/new_test_bd.json')
