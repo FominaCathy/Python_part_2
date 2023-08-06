@@ -97,3 +97,4 @@ def game_guessing(num: int, count: int):
 if __name__ == '__main__':
     game_guessing(50, 3)
     print(_list_cache)
+    print(help(game_guessing))

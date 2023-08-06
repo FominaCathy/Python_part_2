@@ -10,6 +10,7 @@ import csv
 import json
 from random import uniform
 from typing import Callable
+
 __all__ = ['generator_csv_file', 'get_quadratic_roots']
 
 MIN_KOEFF = -200
@@ -58,6 +59,9 @@ def get_quadratic_roots(*args) -> list:
     a, b, c = map(float, args)
 
     d = b ** 2 - 4 * a * c
+    if a == 0:
+        x1 = x2 = (d - c) / b
+        return [x1, x2]
 
     if d > 0:
         x1 = (-b + d ** 0.5) / (2 * a)
