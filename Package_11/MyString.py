@@ -6,6 +6,7 @@
 import datetime
 
 class MyString(str):
+    """Класс строка, которая храни автора и время"""
 
     def __new__(cls, current_str, autor):
         instance = super().__new__(cls, current_str)
