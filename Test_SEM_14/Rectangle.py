@@ -48,9 +48,29 @@ class Rectangle:
     def __str__(self):
         return f'прямоугольник ({self.height} x {self.width})'
 
+    def __add__(self, other):
+
+        # perimetr = self.get_perimetr() + other.get_perimetr()
+        # side_a = perimetr // 6
+        # side_b = (perimetr - side_a * 2) // 2
+
+        return Rectangle(self.height + other.height, self.width + other.width)
+
+    def __sub__(self, other):
+        #
+        # perimetr = abs(self.get_perimetr() - other.get_perimetr())
+        # side_a = perimetr // 6
+        # side_b = (perimetr - side_a * 2) // 2
+
+        return Rectangle(abs(self.height - other.height), abs(self.width - other.width))
+
+
+    def __eq__(self, other):
+        """равно"""
+        return self.area == other.area
 
 if __name__ == "__main__":
-    rect = Rectangle(2, -5)
+    rect = Rectangle(2, 5)
 
     # print(rect.area)
     rect.width = 10
